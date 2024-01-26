@@ -16,11 +16,10 @@ class LoginController {
         'password': password,
       },
     );
-    print('response: ${response.body}');
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       await LocalStorageService().set('token', data['token'] as String);
-      print('Token: ${data['token']}');
+
       return LoginResponse.fromMap(data);
     } else {
       throw Exception('Failed to login. Status Code: ${response.statusCode}');

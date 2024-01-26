@@ -4,19 +4,14 @@ import 'package:vococase/provider/user_list_provider.dart';
 import 'package:vococase/service/local_storage_service.dart';
 
 class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Voco Test Case'),
-          leading: IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              final localStorageService = LocalStorageService();
-              await localStorageService.clear();
-            },
-          ),
         ),
         body: Consumer(
           builder: (context, ref, child) {
@@ -28,13 +23,16 @@ class HomeView extends StatelessWidget {
                   itemCount: users.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(users[index].avatar),
+                      ),
                       title: Text(users[index].firstName),
                       subtitle: Text(users[index].lastName),
                     );
                   },
                 );
               },
-              loading: () => CircularProgressIndicator.adaptive(),
+              loading: () => const CircularProgressIndicator.adaptive(),
               error: (error, stackTrace) => Text('Error: $error'),
             );
           },

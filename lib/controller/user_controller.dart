@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:vococase/constants/api_constants.dart';
 import 'package:vococase/model/user_model.dart';
 
 class UserController {
